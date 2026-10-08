@@ -1,5 +1,10 @@
-/** Allowed non-clinical engagement signal tags only. */
+/**
+ * Allowed NON-CLINICAL engagement signal tags only.
+ * Every tag here must be documented in docs/SIGNAL_MAP.md first
+ * (UI action → hypothesis → what we must NEVER claim).
+ */
 export const SIGNAL_TAGS = [
+  // v1
   "curiosity_open",
   "topic_affinity",
   "hesitation_dwell",
@@ -10,27 +15,25 @@ export const SIGNAL_TAGS = [
   "return_revisit",
   "consent_granted",
   "consent_denied",
+  // v2 (engagement-only, documented in SIGNAL_MAP.md)
+  "pace_band",
+  "attention_dwell",
+  "sequence_path",
+  "settle_watch",
+  "cta_retreat",
+  "presence_idle",
+  "environment_flag",
 ] as const;
 
 export type SignalTag = (typeof SIGNAL_TAGS)[number];
 
-export type SignalEventName =
-  | "question_open"
-  | "question_close"
-  | "question_dwell"
-  | "cta_click"
-  | "cta_submit"
-  | "nda_learn_more"
-  | "aid_learn_more"
-  | "scroll_milestone"
-  | "session_start"
-  | "consent_update"
-  | "section_view";
+export type MetaValue = string | number | boolean | null;
+export type SignalMeta = Record<string, MetaValue>;
 
 export interface SignalPayload {
   visitorId: string;
   sessionId: string;
-  event: SignalEventName | string;
+  event: string;
   signal: SignalTag;
   targetId?: string;
   path: string;
@@ -38,7 +41,7 @@ export interface SignalPayload {
   dwellMs?: number;
   ts: string;
   uaHash: string;
-  meta?: Record<string, string | number | boolean | null>;
+  meta?: SignalMeta;
 }
 
 export interface LeadPayload {
@@ -50,9 +53,19 @@ export interface LeadPayload {
   consent?: boolean;
 }
 
+export type QuestionTopic =
+  | "life"
+  | "work"
+  | "relationship"
+  | "decision"
+  | "privacy"
+  | "hands";
+
 export interface QuestionItem {
   id: string;
-  topic: "life" | "work" | "relationship" | "decision";
+  /** Short code used in open-order sequences, e.g. "Q3". */
+  short: string;
+  topic: QuestionTopic;
   prompt: string;
   whisper: string;
 }

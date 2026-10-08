@@ -1,17 +1,8 @@
-import { AboutModel } from "@/components/AboutModel";
-import { Bridge } from "@/components/Bridge";
-import { Hero } from "@/components/Hero";
-import { QuestionJourney } from "@/components/QuestionJourney";
-import { ReachOut } from "@/components/ReachOut";
+import { Experience } from "@/components/experience/Experience";
+import { getAvailableModels } from "@/lib/models.server";
 
 export default function HomePage() {
-  return (
-    <>
-      <Hero />
-      <Bridge />
-      <QuestionJourney />
-      <AboutModel />
-      <ReachOut />
-    </>
-  );
+  // Which /public/models/*.glb files exist; missing ones fall back to procedural shapes.
+  const models = getAvailableModels();
+  return <Experience models={models} />;
 }

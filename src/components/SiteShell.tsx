@@ -1,18 +1,18 @@
 "use client";
 
+import { MotionConfig } from "framer-motion";
 import type { ReactNode } from "react";
 import { ConsentBanner } from "./ConsentBanner";
-import { Footer } from "./Footer";
 import { SignalProvider } from "./SignalProvider";
-import { SiteHeader } from "./SiteHeader";
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
-    <SignalProvider>
-      <SiteHeader />
-      <main className="flex-1">{children}</main>
-      <Footer />
-      <ConsentBanner />
-    </SignalProvider>
+    // Framer Motion honours the OS reduced-motion setting (transforms off, fades kept).
+    <MotionConfig reducedMotion="user">
+      <SignalProvider>
+        {children}
+        <ConsentBanner />
+      </SignalProvider>
+    </MotionConfig>
   );
 }

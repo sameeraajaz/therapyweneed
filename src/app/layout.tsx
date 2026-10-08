@@ -12,38 +12,36 @@ const dmSans = DM_Sans({
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "SteadyTalk — An hour of steady company",
+  title: "SteadyTalk: an hour of steady company",
   description:
-    "Paid non-psychiatric consultation you can rent. Signed NDA. A grounding aid. Not therapy, not diagnosis — calm company for the thoughts that linger.",
+    "Paid non-psychiatric consultation you can rent. A signed NDA and a grounding aid with every session. Not therapy, not diagnosis, just calm company for the thoughts that linger.",
   openGraph: {
-    title: "SteadyTalk — An hour of steady company",
-    description:
-      "Rent time with someone steady. NDA-protected. Not healthcare.",
+    title: "SteadyTalk: an hour of steady company",
+    description: "Rent time with someone steady. NDA-protected. Not healthcare.",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f4ef",
+  themeColor: "#0e1317",
   width: "device-width",
   initialScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${dmSans.variable} ${fraunces.variable} h-full antialiased`}
-    >
-      <body className="flex min-h-full flex-col bg-warmwhite font-sans text-charcoal">
+    <html lang="en" className={`${dmSans.variable} ${fraunces.variable} antialiased`}>
+      <body className="min-h-screen bg-night-deep font-sans text-mist">
+        <a
+          href="#hero"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-mist focus:px-4 focus:py-2 focus:text-night"
+        >
+          Skip to content
+        </a>
         <SiteShell>{children}</SiteShell>
       </body>
     </html>
