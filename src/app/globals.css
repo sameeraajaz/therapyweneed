@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f4ef;
+  --foreground: #1c1c1a;
+  --charcoal: #1c1c1a;
+  --sage: #2c5f4f;
+  --sage-deep: #234a3e;
+  --warmwhite: #f7f4ef;
+  --stone-muted: #8a857c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-charcoal: var(--charcoal);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-warmwhite: var(--warmwhite);
+  --color-stone-muted: var(--stone-muted);
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--sage) 28%, transparent);
+  color: var(--charcoal);
+}
+
+:focus-visible {
+  outline-color: var(--sage);
+}
